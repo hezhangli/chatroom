@@ -59,6 +59,31 @@ func login(userId int, password string) error {
 		return err
 	}
 
-	fmt.Println("客户端发送消息的长度ok")
+	//fmt.Println("客户端发送消息的长度ok")
+	//发送内容本身
+	_, err = conn.Write(data)
+	if err != nil {
+		return err
+	}
+
+	//休眠20s
+	//time.Sleep(20 * time.Second)
+	//fmt.Println("休眠了20s ")
+
+	pkg, err := readPkg(conn)
+	if err != nil {
+		return err
+	}
+	var loginResMsg message.LoginResMes
+	err = json.Unmarshal([]byte(pkg.Data), &loginResMsg)
+	if err != nil {
+		return err
+	}
+	if loginResMsg.Code == 200 {
+		fmt.Println("登录成功")
+	}
+	if loginResMsg.Code == 500 {
+		return err
+	}
 	return nil
 }

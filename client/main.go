@@ -47,9 +47,7 @@ func main() {
 
 		err := login(userId, password)
 		if err != nil {
-			fmt.Println("用户名或密码错误， 登录失败")
+			return
 		}
-
-		fmt.Println("登录成功 ")
 	}
 }
