@@ -1,6 +1,7 @@
 package main
 
 import (
+	"chatroom/client/utils"
 	"chatroom/common/message"
 	"encoding/binary"
 	"encoding/json"
@@ -70,7 +71,7 @@ func login(userId int, password string) error {
 	//time.Sleep(20 * time.Second)
 	//fmt.Println("休眠了20s ")
 
-	pkg, err := readPkg(conn)
+	pkg, err := utils.readPkg(conn)
 	if err != nil {
 		return err
 	}
